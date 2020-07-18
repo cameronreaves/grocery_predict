@@ -1,0 +1,45 @@
+---
+title: "shopping"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+data = readxl::read_excel('shopping.xlsx')
+head(data)
+```
+
+
+```{r}
+data <- data %>% 
+  mutate(Store = as_factor(Store), Type = as_factor(Type))
+```
+
+```{r}
+data %>% 
+ggplot(aes(Store, Total)) +
+  geom_col()
+```
+
+
+```{r}
+sprouts <- data %>% 
+  filter(Store %in% list('Sprouts')) 
+  
+sprouts %>% 
+  ggplot(aes(Type)) +
+  geom_bar()
+```
+
+
+```{r}
+sprouts %>% 
+  group_by(Type) %>% 
+  summarise(Total = sum(Total)) %>% 
+  ggplot(aes(Type, Total)) +
+  geom_col()
+```
+
