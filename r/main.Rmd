@@ -8,7 +8,7 @@ library(tidyverse)
 ```
 
 ```{r}
-data = readxl::read_excel('shopping.xlsx')
+data = readr::read_csv('../data/shopping.csv')
 head(data)
 ```
 
@@ -41,5 +41,10 @@ sprouts %>%
   summarise(Total = sum(Total)) %>% 
   ggplot(aes(Type, Total)) +
   geom_col()
+```
+
+```{r}
+data %>% 
+  filter(Type == 'Grocery')
 ```
 
